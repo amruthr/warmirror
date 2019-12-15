@@ -80,7 +80,7 @@ const decorationData = gender => gender === 'women' ? categoriesWomenData : cate
 const eachCategory = (gender, oneKeywordForFilter) => (
   decorationData(gender).map(x=>(
     <Col md='4' style={styles.card} key={x.cardTitle}>
-      <Card>    
+      <Card>
           <div style={styles.cardBtn} onClick={()=>oneKeywordForFilter(x.cardTitle)}>
             <Link to={`/productslist/${gender}/`}>
               <CardImg src={x.imgSrc} alt="Card image cap" style={{boxShadow: '0px 0px 7px 0px rgba(0,0,0,0.75)'}}/>
@@ -94,7 +94,6 @@ const eachCategory = (gender, oneKeywordForFilter) => (
     </Col>
   ))
 );
-  
 
 
 const ItemsListGenderHomepage = props => {

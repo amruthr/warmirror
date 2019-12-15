@@ -1,6 +1,9 @@
 {
   "name": "ecommerce-react",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.0"
+  },
   "main": "index.js",
   "license": "MIT",
   "scripts": {

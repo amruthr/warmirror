@@ -54,8 +54,8 @@ export default class Admin extends Component {
     }
 
     return (
-      <div>
-        <Nav tabs>
+      <div style={{display:'flex'}}>
+        <Nav vertical className="col-md-2">
           <NavItem>
             <NavLink style={styles.tab1} onClick={() => { this.toggle('1'); }}>
               <b>Orders</b>
@@ -77,7 +77,7 @@ export default class Admin extends Component {
             </NavLink>
           </NavItem>
         </Nav>
-        <TabContent activeTab={this.state.activeTab}>
+        <TabContent className="col-md-10" activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <AdminTableOrders stylesTab1={styles.tab1}/>
           </TabPane>

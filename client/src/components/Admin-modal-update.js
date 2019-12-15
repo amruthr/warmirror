@@ -32,11 +32,12 @@ class AdminModalUpdate extends Component {
       description
     })
     .then(response => {
-      this.setState({ modalEdit: !this.state.modalEdit });
+      this.setState({ modalEdit: false });
+      window.location.reload(true);
       console.log(response);
     })
     .then(() => {
-      window.location.reload(true)
+      window.location.reload(true);
     })
     .catch(err => {
       console.log(err);

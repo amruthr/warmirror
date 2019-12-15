@@ -5,8 +5,9 @@ const router = express.Router();
 const ModelProducts = require('../models/ModelProducts');
 const ModelLog = require('../models/ModelLog');
 const ModelOrders = require('../models/ModelOrders');
+const ModelCategories = require('../models/ModelCategory');
 const ModelCarousel = require('../models/ModelCarouselData');
-
+passport.initialize();
 router.get('/carouselData', (req, res)=>{
   ModelCarousel.find((err, x) => {
     err ? res.status(500).send(err) :
@@ -118,6 +119,12 @@ router.get('/orders', (req, res)=> {
   })
 })
 
+router.get('/shopbyprice', (req, res)=> {
+  ModelProducts.aggregate([{$group:{_id:"$tags", price:{$min:"$price"}, catimg:{$first:"$images"}}}],(err, x) => {
+      err ? res.status(500).send(err) :
+      res.json(x)
+  })
+})
 
 router.delete('/delete/item/:id', (req, res, next)=> {
   const { id } = req.params
@@ -145,6 +152,32 @@ router.get('/log', (req, res)=> {
   })
 })
 
+router.get('/category', (req, res)=> {
+  ModelCategories.find((err, x) => {
+    err ? res.status(500).send(err) :
+    res.json(x).status()
+})
+})
+
+router.get('/category/:id', (req, res)=> {
+  ModelCategories.findById(req.params.id, )
+    .then(x => {
+      if (!x) return res.status(404).end()
+      return res.json(x)
+    })
+    .catch(err => next(err))
+})
+
+router.post('/category', (req, res, next)=> {
+  const { catname} = req.body
+  const newCategory = new ModelCategories({ 
+    catname
+  });
+  newCategory.save((err, saveditem) => {
+    if (err) return console.log(err);
+    res.end();
+  })
+})
 
 router.get('/secret', passport.authenticate('jwt', {session: false}), (req, res)=> {
   res.json({authorization: true});

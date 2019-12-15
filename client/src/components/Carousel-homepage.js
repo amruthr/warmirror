@@ -18,7 +18,7 @@ const styles = {
     justifyContent: 'center',
     flexDirection: 'column',
     color:'#ffbf00',
-    
+    height:'350px',
     
   },
   fixDown:{
@@ -29,7 +29,7 @@ const styles = {
         top: '-50px',
         marginLeft:'10px!important',
         background: '#00000033',
-        overflow: 'overlay'
+        
   }
 }
 
@@ -96,15 +96,15 @@ class CarouselHomepage extends Component {
     const {items} = this.state;
     const slides = items.map(x => {
       return (
-       <CarouselItem
+       <CarouselItem 
           onExiting={this.onExiting}
           onExited={this.onExited}
           key={x.src}
           link={x.btn.link}
         > <Link to={x.btn.link}>
-          <Row  style={{backgroundColor: '#111'}}>
+          <Row  style={{backgroundColor: '#050505', height:'350px'}}>
             <Col md="6">
-              <img src={x.src} alt={x.altText} style={{width: '100%', height: 'fitContent', filter: 'brightness(0.5)'}}/>
+              <img src={x.src} alt={x.altText} style={{width: '100%', height: 'fitContent', filter: 'brightness(1)'}}/>
             </Col>
             <Col md="6" style={styles.sliderContent , isMobile?styles.fixDown:styles.sliderContent }>
               <h2>{x.title}</h2>
@@ -122,15 +122,18 @@ class CarouselHomepage extends Component {
     });
 
     return (
+      
       <Carousel
+      autoPlay = {true}
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
+        keyboard ={true}
       >
         {slides}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-      </Carousel>
+      </Carousel>      
     );
   }
 }

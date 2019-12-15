@@ -7,8 +7,9 @@ import { Jumbotron, Container } from 'reactstrap';
 
 const styles = {
   bannerCoverPc: {
-    backgroundImage: 'url("/images/banner-cover-pc.jpg")',
-    backgroundSize: 'cover'
+   // backgroundImage: 'linear-gradient(to right, #fefefe, #fff)',
+    backgroundSize: 'cover',
+    height: '150px',
   },
   bannerCoverMobile: {
     backgroundImage: 'url("/images/banner-cover-mobile.jpg")',
@@ -16,14 +17,25 @@ const styles = {
   },
   textBanner: {
     textShadow: "0px",
-    textAlign: 'left',
-    color:'white',
-    fontFamily:'cursive',
-    fontSize:'50'
+    textAlign: 'center',
+    color:'black',
+    fontFamily:'Samarkan, Montserrat, Roboto',
+    fontSize:'100px',
+    margin: 'auto',
+    background: '#ffbf00',
+    width:'fit-content',
+  },
+  textNone:{
+    display:'none',
   },
   centerButtons: {
-    textAlign: 'center',
-    padding: '10px'
+    right:'5px',
+    padding: '10px',
+    height: '300px',
+    position:'relative',
+    top:'0px',
+    textAlign:'center',
+    backgroundRepeat: 'no-repeat',
   },
   titleH1Pc: {
     fontSize: '80px'
@@ -33,15 +45,12 @@ const styles = {
   }
 };
 
-const { bannerCoverPc, bannerCoverMobile, textBanner, centerButtons, titleH1Mobile, titleH1Pc } = styles
+const { bannerCoverPc, bannerCoverMobile, textNone, textBanner, centerButtons, titleH1Mobile, titleH1Pc } = styles
 
 const HeroBanner = () => (
-  <Jumbotron fluid style={isMobile? bannerCoverMobile : bannerCoverPc}>
+  <div style={isMobile? bannerCoverMobile : bannerCoverPc}>
     <Container fluid style={{height: 'max-height'}}>
-      <div style={textBanner}>
-        <h1 className="display-2" style={isMobile ? titleH1Mobile : titleH1Pc}>Vastram</h1>
-        <p>The Fashion Station</p>
-      </div>
+      
      
       <div style={centerButtons}>
         <ButtonLinkGenderPage gender={'men'} content='Mens Fashion' /> 
@@ -49,7 +58,7 @@ const HeroBanner = () => (
         <ButtonLinkGenderPage gender={'kids'} content='Kids Zone' />
       </div>
     </Container>
-  </Jumbotron>
+  </div>
 );
 
 export default HeroBanner;

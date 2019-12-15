@@ -9,6 +9,9 @@ import ButtonAddToCart from "./Button-add-to-cart";
 import CheckoutModal from "./Checkout-modal";
 import ButtonsColorSelect from "./Buttons-color-select";
 import CarouselItemPage from "./Carousel-item";
+//import CursorZoom from 'react-cursor-zoom';  github.com/carmax
+
+
 
 const propTypes = {
   infoItem: PropTypes.array.isRequired,
@@ -83,7 +86,7 @@ class Item extends Component {
       </div>
     ));
     const MainImageBrowserView = (
-      <img
+      <img 
         src={infoItem.images[selectedImage]}
         alt="Smiley face"
         width="100%"

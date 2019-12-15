@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import './style/transition.css';
 
 
-const Loading = () => <div style={{height: '1000px'}}></div>;
+const Loading = () => <div style={{height: '1000px',textAlign: 'center', display:'flex', justifyContent:'center',}}>Getting you the finest of fashion</div>;
 
 const ItemContainer = Loadable({
   loader: () => import('./containers/Item-container'),

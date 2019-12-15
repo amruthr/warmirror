@@ -3,6 +3,9 @@ import { Link, NavLink } from 'react-router-dom'
 import {
   isBrowser
 } from "react-device-detect";
+import {
+  isMobile
+} from "react-device-detect";
 import { connect } from 'react-redux'
 import { oneKeywordForFilter, resetKeywords} from '../actions/DataFetchingActions';
 import { selectorTotalItemsCart } from '../selectors/selector_list_statistics';
@@ -29,7 +32,40 @@ const styles = {
   navbarBackground: {
     backgroundColor: '#000',
     zIndex: 1
-  }
+  },
+  textBanner: {
+    textShadow: "0px",
+    textAlign: 'center',
+    color:'black',
+    fontFamily:'Samarkan, Montserrat, Roboto',
+    fontSize:'100px',
+    margin: 'auto',
+    background: '#ffbf00',
+    width:'fit-content',
+  },
+  textNone:{
+    display:'none',
+  },
+  textBanner: {
+    textShadow: "0px",
+    textAlign: 'center',
+    color:'black',
+    fontFamily:'Samarkan, Montserrat, Roboto',
+    fontSize:'50px',
+    margin: '0px',
+    background: '#ffbf00',
+    width:'fit-content',
+  },
+  textNone:{
+    display:'block',
+    background: '#ffbf00',
+    textShadow: "0px",
+    textAlign: 'center',
+    margin: '0px',
+    color:'black',
+    fontFamily:'Beyno, Samarkan, Montserrat, Roboto',
+    fontSize:'36px',
+  },
 }
 
 const arrowStyleSubmenu = (subMenuCategorySelected, gender, arrowDown) => subMenuCategorySelected === gender && <div style={arrowDown}></div>
@@ -43,9 +79,27 @@ class NavbarContainer extends Component {
       isOpen: false,
       subMenuOpen: false,
       subMenuCategorySelected: '',
-      openCartPreview: false
+      openCartPreview: false,
+      navitems : [],
     };
   }
+  componentDidMount() {
+    fetch('/api/category')
+      .then(response => {        
+        return response.json();
+      })
+      .then((data) => {        
+        this.setState({
+          navitems: data.map(item=>({
+            catname: item.catname,   
+            catid :item._id,   
+            image: item.images[0],
+            subcats: item.subcats,
+          }))
+        });
+      });
+  }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -71,23 +125,24 @@ class NavbarContainer extends Component {
   render() {
     const { sendOneKeyword, getCart, resetKeywords, totalItemsSelectorStats } = this.props
     const { isOpen, subMenuCategorySelected, subMenuOpen, openCartPreview } = this.state
-    const { men, women } = this.props.categoriesProducts
+    const { men, women, children, partyWear, casuals, vastram_specials, } = this.props.categoriesProducts
     const { itemMenu, arrowDown, navbarBackground } = styles
+    const {navitems} = this.state
 
     const categoriesNavItems = gender =>
     isBrowser ?            
       (<NavItem style={itemMenu} onMouseEnter={()=>this.handleSubMenuEnter(gender)} >
-        <NavLink to={`/category/${gender}`}  className="text-white" onClick={()=>resetKeywords()}>{gender.charAt(0).toUpperCase() + gender.slice(1)}</NavLink> {arrowStyleSubmenu(subMenuCategorySelected, gender, arrowDown)}
+        <NavLink to={`/category/${gender.catid}`}  className="text-white" onClick={()=>resetKeywords()}>{gender.catname}</NavLink> {arrowStyleSubmenu(subMenuCategorySelected, gender, arrowDown)}
       </NavItem>) :
       (<NavItem style={itemMenu}>
-      <NavLink to={`/category/${gender}`}  className="text-white" onClick={()=>{return (resetKeywords(), this.toggle())}}>{gender}</NavLink>
+      <NavLink to={`/category/${gender.catid}`}  className="text-white" onClick={()=>{return (resetKeywords(), this.toggle())}}>{gender.catname}</NavLink>
     </NavItem>)
 
     const cartNavItem = 
     isBrowser ?  
       (<Nav className="ml-auto" navbar style={{cursor: 'pointer'}}>
       <NavItem>
-        <div onClick={()=>this.setState(totalItemsSelectorStats==0?{ openCartPreview: openCartPreview }:{ openCartPreview:!openCartPreview })} className="text-white">Cart 
+        <div onClick={()=>this.setState(totalItemsSelectorStats==0?{ openCartPreview: openCartPreview }:{ openCartPreview:!openCartPreview })} className="glyphicon glyphicon-shopping-cart">. 
           <Badge color="danger" pill style = {totalItemsSelectorStats==0?{display: 'none'}:{display: 'block'}}>
             {totalItemsSelectorStats}
           </Badge>
@@ -113,12 +168,14 @@ class NavbarContainer extends Component {
     return (
       <div className="sticky-top">
         <Navbar dark expand="md" style={navbarBackground}>
-          <Link to="/" style={itemMenu} className="text-white"> vastram</Link>
+          <Link to="/" style={itemMenu} className="text-white"><div style={isMobile?styles.textNone:styles.textBanner}>
+      Vastram
+      </div></Link>
           <NavbarToggler light onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar >
-            {categoriesNavItems('men')}
-            {categoriesNavItems('women')}
-            {cartNavItem}
+            {navitems.map(x=>
+          categoriesNavItems(x)
+            )}
           </Collapse>
         </Navbar>
         {subMenuHoverBrowser}

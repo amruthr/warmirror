@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Input, Form, FormGroup, Label, Container, Alert } from 'reactstrap';
+import React, { Component ,  useState }  from 'react';
+import { Button, Input, Form, FormGroup, Label, Container, UncontrolledButtonDropdown , Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 
 
@@ -18,9 +18,25 @@ class AdminFormAddItem extends Component {
       description: '',
       price: 0,
       success: false,
-      sizes: ['M','XL']
+      sizes: ['M','XL'],
+      taginput: true,
+      catoptions:[]
     };
   }
+
+componentDidMount(){
+  fetch('/api/shopbyprice') 
+  .then(response => {        
+     return response.json();
+   })
+   .then((data) => {        
+     this.setState({
+       catoptions: data.map(x=>({
+         valuex: x._id
+       }))
+     })
+    });
+}
 
   toggle = () => {
     this.setState({
@@ -54,11 +70,21 @@ class AdminFormAddItem extends Component {
   onChangeTags = (e) => this.setState({tags: [e.target.value]})
   onChangeImages = (e) => this.setState({images: [e.target.value]})
   onChangeDescription = (e) => this.setState({ description: e.target.value })
-
- 
-
+  enableTagsInput =(e) => this.setState({taginput: false})
   render() {
+    const {catoptions} = this.state
+    const CategoryData = ()=>{
+         return (
+           <div>
+          {catoptions.map(x=>
+           <DropdownItem onClick={this.onChangeTags} value= {x.valuex} >{x.valuex}</DropdownItem>      
+          )
+        }
+          </div>
+        )
+      }
     const { title, price, color, size, tags, images, description } = this.state
+ 
     return (
       <Container style={{paddingTop: '50px', paddingBottom:'50px'}}>
       <h1>Add new item</h1>
@@ -81,19 +107,27 @@ class AdminFormAddItem extends Component {
         </FormGroup>
        
         {
-        this.state.sizes.map( x =>{
-   
+        this.state.sizes.map( x =>{   
       <FormGroup>
         <Label for="exampleEmail">{x}</Label>
         <Input placeholder='example: XS: 10, L:3, XL:20' value="0" onChange={this.onChangeqty} />
-      </FormGroup>
-      
+      </FormGroup>      
   })
-  
-  }
-        <FormGroup>
-          <Label for="exampleEmail">Category</Label>
-          <Input placeholder='example: Polo' value={this.state.tags} onChange={this.onChangeTags} />
+        }
+      <FormGroup>
+        <Label for="exampleEmail">Category  :</Label>
+        <UncontrolledButtonDropdown direction="down" onChange={this.onChangeTags}>
+      <DropdownToggle  onChange={this.onChangeTags}>
+        Choose
+      </DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem header>select from list</DropdownItem>
+  <CategoryData/>
+        <DropdownItem divider />
+        <DropdownItem style= {{background:'dodgerblue', border:'Solid 10px white', color: 'white'}}onClick = {this.enableTagsInput}>new Category</DropdownItem>
+      </DropdownMenu>
+    </UncontrolledButtonDropdown>
+    <Input disabled={this.state.taginput} placeholder='or type your own...' value={this.state.tags} onChange={this.onChangeTags} />
         </FormGroup>
         <FormGroup>
           <Label for="exampleEmail">Images</Label>

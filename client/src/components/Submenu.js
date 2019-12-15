@@ -14,35 +14,31 @@ const propTypes = {
 }
 
 
-const styles ={
+const styles = {
   subMenu: {
     width: '100%',
-    height: 'fit-content',
-    backgroundColor:'#000000aa', 
-    backdropFilter : 'blur(3px)',   
-    top:'0', 
+    height: '250px',
+    backgroundColor:'rgba(255, 255, 255, 0.7)',
+    backdropFilter: 'blur(3px)',
+    position: 'absolute', 
+    top:'100px', 
     left:'0', 
-    zIndex:'2',
-    padding:'15px'
+    zIndex:'2'
   },
-  
+  subMenuImage: {
+    width: '100%',
+    maxHeight: '300px',
+    padding:'70px'
+  },
   subMenuCategories: {
     paddingTop:'70px'
   },
   subMenuCategoriesUl: {
     listStyleType: 'none',
-    display : 'flex',
-    flexDirection: "row",
-    fontSize: '15px',
-    
+    fontSize: '15px'
   },
   subMenuCategory: {
-    color: '#ffbf00',
-    background : '#000',
-    padding : '10px 20px',
-    marginRight: '10px',
-    borderRadius: '20px',
-    
+    color: '#343a40'
   }
 }
 
@@ -53,13 +49,19 @@ const Submenu = ({
   handleSubMenuExit
 }) => (
   <div style={styles.subMenu} onMouseLeave={handleSubMenuExit}>
-    <div style={styles.subMenuCategoriesUl}>
+    <Row>
+      <Col md="3">
+        <img alt={gender} style={styles.subMenuImage} src={gender.image}></img>
+        </Col>
+        <Col style={styles.subMenuCategories}>
+        <p><strong>{gender.catname} Categories</strong></p>
+          <div style={styles.subMenuCategoriesUl}>
             {
-              itemsListByGender.map(x => <div key={x} onClick={()=>sendOneKeyword(x)}>
-                <Link to={`/productslist/${gender}`} style={styles.subMenuCategory
-            }> {x}</Link></div>)
+              itemsListByGender.map(x => <div key={x} onClick={()=>sendOneKeyword(x)}><Link to={`/productslist/${gender}`} style={styles.subMenuCategory}> {x}</Link></div>) 
             }
           </div>
+        </Col>
+    </Row>
   </div>
 );
 
