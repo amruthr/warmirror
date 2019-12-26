@@ -31,6 +31,8 @@ export default class Admin extends Component {
     const { stylesTab2 } = this.props
     const { apiList } = this.state
     return (
+      <div style={{paddingTop: '50px', paddingBottom:'50px', background:'#fff'}}>
+        <h1>Update or Delete products</h1>
       <Table responsive striped bordered hover size="sm">
         <thead style={stylesTab2}>
           <tr>
@@ -67,6 +69,7 @@ export default class Admin extends Component {
           }
         </tbody>
       </Table>
+      </div>
     )
   }
 };

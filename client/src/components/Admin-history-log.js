@@ -102,11 +102,12 @@ export class AdminHistoryLog extends Component {
       )}</td>
         </tr>
       )
-    return (
-      <div>
+    return (      
+      <div style={{paddingTop: '50px', paddingBottom:'50px', background:'#fff'}}>
+        <h1>History Log </h1>
         <Row>
-          <Col md="6">
-            <Table dark borderless hover size="sm" responsive>
+          <Col md="6" style = {{height:'400px', overflowX:'scroll'}}>
+            <Table dark borderless hover size="sm" responsive  style={{margin:'20px', fontSize:'12px', height:'400px!important', overflowX:'scroll', maxHeight:'400px'}}>
               <thead style={stylesTab4}>
                 <tr>
                   <th>#</th>

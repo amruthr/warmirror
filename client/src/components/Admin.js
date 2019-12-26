@@ -30,54 +30,37 @@ export default class Admin extends Component {
   render() {
 
     const styles = {
-      tab1: {
-        cursor: 'pointer',
-        backgroundColor: '#cd5957',
-        color:'white'
+      tabx: {
+        cursor: 'pointer',      
+        color:'white',
       },
-      tab2: {
-        cursor: 'pointer',
-        backgroundColor: '#78a4a2',
-        color:'white'
-      },
-      tab3: {
-        cursor: 'pointer',
-        backgroundColor: '#66bceb',
-        color:'white'
-      },
-      tab4: {
-        cursor: 'pointer',
-        backgroundColor: '#ffce56',
-        color:'white'
-      },
-
     }
 
     return (
       <div style={{display:'flex'}}>
-        <Nav vertical className="col-md-2">
+        <Nav vertical style={{background:'#050505'}} className="col-md-2">
           <NavItem>
-            <NavLink style={styles.tab1} onClick={() => { this.toggle('1'); }}>
+            <NavLink style={styles.tabx} onClick={() => { this.toggle('1'); }}>
               <b>Orders</b>
             </NavLink> 
           </NavItem>
           <NavItem>
-            <NavLink style={styles.tab2} onClick={() => { this.toggle('2'); }}>
+            <NavLink style={styles.tabx} onClick={() => { this.toggle('2'); }}>
               <b>Update/delete items</b>
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink style={styles.tab3} onClick={() => { this.toggle('3'); }}>
+            <NavLink style={styles.tabx} onClick={() => { this.toggle('3'); }}>
               <b>Add new item</b>
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink style={styles.tab4} onClick={() => { this.toggle('4'); }}>
+            <NavLink style={styles.tabx} onClick={() => { this.toggle('4'); }}>
               <b>History log</b>
             </NavLink>
           </NavItem>
         </Nav>
-        <TabContent className="col-md-10" activeTab={this.state.activeTab}>
+        <TabContent className="col-md-10" style={{height:'-webkit-fill-available'}} activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <AdminTableOrders stylesTab1={styles.tab1}/>
           </TabPane>

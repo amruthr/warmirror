@@ -28,6 +28,9 @@ export default class AdminTableOrders extends Component {
     const { stylesTab1 } = this.props
     const { apiList } = this.state
     return (
+     <div style={{paddingTop: '50px', paddingBottom:'50px'}}>
+       <h1>Customer orders</h1>
+       {apiList.length == 0?<h1> No orders yet</h1> : 
       <Table responsive striped hover size="sm">
         <thead style={stylesTab1}>
           <tr >
@@ -74,6 +77,8 @@ export default class AdminTableOrders extends Component {
           }
         </tbody>
       </Table>
+  }
+      </div>
     )
   }
 };

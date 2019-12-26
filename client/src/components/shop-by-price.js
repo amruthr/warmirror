@@ -52,18 +52,19 @@ class  shopByPrice extends Component {
     return(
     <div style = {{width: '200px',
     border: '0px',
-    background: '#fff',
+    background: '#ffbf00',
     margin: '20px',
+    height: '350px',
     display: 'flex',
+    borderRadius:'5px',
     flexDirection: 'column',
     flexWrap: 'nowrap',
     margin: '10px 20px',
-    height: 'fit-content',
-    alignItems: 'center',}}><img  style = {{position:'relative', width:'100%',height:'auto',padding:'2px' }} src={x.img}/><p>{x.catname} starting at  ₹{x.price}</p></div>
+    alignItems: 'center',}}><img  style = {{position:'relative', width:'100%',height:'300px',padding:'2px' }} src={x.img}/><p>{x.catname} starting at  ₹{x.price}</p></div>
     )
     })
     return(
-      <div style = {{display:'flex', flexFlow:'row nowrap', width:'300%', backgroundImage:'linear-gradient(to right, #0f000f, #271a27)', }}>{cards}</div>
+      <div style = {{display:'flex', flexFlow:'row nowrap', width:'300%', background:'#000', }}>{cards}</div>
     )
   }
 } 

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  isMobile
+} from "react-device-detect";
 import axios from 'axios';
 import { Link, Redirect } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Container, Col } from 'reactstrap';
@@ -74,7 +77,7 @@ class AdminContainer extends Component {
     return (
       <div>
         {this.redirectLoginSuccessListener()}
-        <Container className="App" style={{paddingTop: '150px', paddingBottom: '200px'}}>
+        <Container className="App" style={isMobile?{paddingTop: '50px', paddingBottom: '50px', marginBottom:'100px',  background: '#fefefe', width:'90%'}:{paddingTop: '5px', paddingBottom: '5px', marginBottom:'50px', marginTop:'50px',  background: '#fefefe', width:'60%'}}>
         <h2>Admin Dashboard</h2>
         <Form className="form">
           <Col>
@@ -102,8 +105,8 @@ class AdminContainer extends Component {
             </FormGroup>
           </Col>
           <Button onClick={this.onLogin}>Login</Button>
-          <Button onClick={this.onSignup}>Sign Up</Button>
-          <Link to="/dashboard">secret page</Link>
+          <Button style={{left: '100px',position: 'relative' }} onClick={this.onSignup}>Sign Up</Button>
+          {/* <Link to="/dashboard">secret page</Link> */}
           <p>{errors}</p>
         </Form>
       </Container>
