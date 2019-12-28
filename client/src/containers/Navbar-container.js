@@ -170,7 +170,7 @@ class NavbarContainer extends Component {
         <Navbar dark expand="md" style={navbarBackground}>
           <Link to="/" style={itemMenu} className="text-white"><div style={isMobile?styles.textNone:styles.textBanner}>
       Vastram
-      </div></Link>
+      </div><h6 style={{fontSize:"7px", fontFamily:"Monospace", color:"white"}}>happy 2020!!</h6></Link>
           <NavbarToggler light onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar >
             {navitems.map(x=>
