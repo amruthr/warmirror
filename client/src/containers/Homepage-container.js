@@ -4,7 +4,7 @@ import HeroBanner from '../components/Hero-banner';
 import CarouselHomepage from '../components/Carousel-homepage';
 import ShopByPrice from '../components/shop-by-price';
 import HeadingStyle from '../components/headstyle';
-const styles = {height: '300px',width:'80%', marginTop: '2px',margin:'auto', display: 'flex',overflow: 'hidden',justifyContent: 'center'};
+const styles = {height: '300px',width:'98%', marginTop: '2px',margin:'auto', display: 'flex',overflow: 'hidden',justifyContent: 'center'};
 const SBPContainerStyles = {
   width: '100%',
   overflowX:'scroll',
