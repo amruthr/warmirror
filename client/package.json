@@ -18,7 +18,7 @@
     "react-rangeslider": "2.2.0",
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
-    "react-scripts": "1.1.5",
+    "react-scripts": "5.0.1",
     "react-snow-effect": "^1.2.0",
     "react-star-ratings": "2.3.0",
     "reactstrap": "6.4.0",
@@ -34,7 +34,7 @@
   },
   "proxy": "http://localhost:5000/",
   "devDependencies": {
-    "mini-css-extract-plugin": "^0.8.0"
+    "mini-css-extract-plugin": "^2.7.2"
   },
   "engines": {
     "node": "10.15.0"
